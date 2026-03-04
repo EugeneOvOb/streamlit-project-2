@@ -8,7 +8,18 @@ import pandas as pd
 # ==========================================
 @st.cache_resource
 def init_connection():
-    credentials = dict(st.secrets["gcp_service_account"])
+    # 1. 取得 secrets 對象
+    s = st.secrets["gcp_service_account"]
+    
+    # 2. 將其轉換為一般的 Python 字典 (使用 .to_dict() 比直接 dict() 更安全)
+    credentials = s.to_dict()
+    
+    # 3. 關鍵修正：手動處理 private_key 中的換行問題
+    # 無論你的 TOML 裡面是實際換行還是寫成 \n，這行都能確保 gspread 讀到正確格式
+    if "private_key" in credentials:
+        # 先把真正的反斜線+n 替換成真正的換行符
+        credentials["private_key"] = credentials["private_key"].replace("\\n", "\n")
+        
     gc = gspread.service_account_from_dict(credentials)
     return gc
 
