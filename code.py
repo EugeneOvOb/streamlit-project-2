@@ -29,8 +29,8 @@ gc = init_connection()
 # ==========================================
 # 2. 開啟指定的試算表與工作表
 # ==========================================
-SHEET_INPUT = "https://docs.google.com/spreadsheets/d/1Y2_ihmnsoOcioF0pPBuGc3F5ZIgJ_8TP1QSHCac18sA/"
-WORKSHEET_NAME = "sheet bot"
+SHEET_INPUT = "https://docs.google.com/spreadsheets/d/1ACLG76mb4D7fmlOArIZWOIgGEymoQv5ryjtmRbxqnDk/edit?gid=0#gid=0"
+WORKSHEET_NAME = "sheet"
 
 try:
     if SHEET_INPUT.startswith("http://") or SHEET_INPUT.startswith("https://"):
